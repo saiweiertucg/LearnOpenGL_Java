@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.practice.gang.learnopengl_java">
+    package="com.practice.gang.learnopengljava">
 
     <application
         android:allowBackup="true"

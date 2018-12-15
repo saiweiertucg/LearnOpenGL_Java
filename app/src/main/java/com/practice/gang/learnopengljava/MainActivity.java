@@ -1,4 +1,4 @@
-package com.practice.gang.learnopengl_java;
+package com.practice.gang.learnopengljava;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
