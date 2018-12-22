@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="navigationview_header_height">160dp</dimen>
+
+    <dimen name="navigation_view_header_textSize">24dp</dimen>
+</resources>
