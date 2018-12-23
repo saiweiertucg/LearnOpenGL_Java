@@ -14,13 +14,14 @@ import android.view.MenuItem;
 
 import com.practice.gang.learnopengljava.R;
 import com.practice.gang.learnopengljava.fragment.BaseFragment;
+import com.practice.gang.learnopengljava.fragment.ItemFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BaseFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
     private Toolbar mToolbar;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -49,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
+                String title = String.valueOf(item.getTitle());
+                navFrgment(title);
+
+                DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
         });
 
@@ -71,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        navFrgment("gettingstart");
     }
 
     private void navFrgment(String title) {
@@ -93,4 +101,14 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
+    @Override
+    public void onListFragmentInteraction(ItemFactory.FragmentItem item) {
+        startActivity(new Intent(this, item.getActivityClass()));
+    }
+
+    @Override
+    public List<Class> getActivityClasses(String pkg) {
+        return map.get(pkg);
+    }
 }
